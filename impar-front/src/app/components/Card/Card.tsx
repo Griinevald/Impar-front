@@ -6,7 +6,7 @@ import IconDelete from './icons/Icon-trash.svg'
 import IconEdit from './icons/Icon-edit.svg'
 import CardLogic from "./CardLogic";
 
-const Card = ({ imgUrl, status, id, name }: Icard) => {
+const Card = ({ imgUrl, status, id, name, idImg }: Icard) => {
 
     const { openDeleteCard, openEditCard } = CardLogic();
 
@@ -20,7 +20,7 @@ const Card = ({ imgUrl, status, id, name }: Icard) => {
                     <div className={styles.separator} ></div>
                     <div className={styles.status}>
                         <p>
-                           {name}
+                            {name}
                         </p>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ const Card = ({ imgUrl, status, id, name }: Icard) => {
                     <div className={styles.buttonSeparator}></div>
                     <div className={styles.divButtonAction}>
                         <Image className={styles.icon} src={IconEdit} alt="Editar" />
-                        <p onClick={() => openEditCard(imgUrl, status, id, name)} className={styles.editHover}>Editar</p>
+                        <p onClick={() => openEditCard(imgUrl, status, id, name, idImg)} className={styles.editHover}>Editar</p>
                     </div>
                 </div>
             </div>

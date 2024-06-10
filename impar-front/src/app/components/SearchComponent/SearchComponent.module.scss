@@ -25,30 +25,48 @@
             input[type=text] {
                 background-position: 10px 10px;
                 width: calc(100% - 70px);
-                max-width: 1046px;
+                max-width: 1000px;
                 height: 76px;
                 background: #FFFFFF 0% 0% no-repeat padding-box;
-                border-radius: 8px;
+
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+
                 font-size: 24px;
                 outline: none;
                 border: none;
-                padding: 29px 70px 22px 23px;
+                padding: 29px 0px 22px 23px;
                 font-family: "muli", sans-serif;
                 font-weight: 300;
                 font-style: normal;
-                cursor: pointer;
                 box-sizing: border-box;
                 background-position: right 25px center;
                 z-index: 1;
             }
 
-            .icon {
-                width: 49px;
-                height: 49px;
-                color: #ccc;
-                position: absolute;
-                right: 20px;
+            .buttonSearch {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 70px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                border: none;
+                outline: none;
+                height: 76px;
+                background: #FFFFFF 0% 0% no-repeat padding-box;
                 cursor: pointer;
+                .img {
+                    transition: transform 0.1s ease;
+
+                }
+            }
+
+            .buttonSearch:active {
+                .img {
+                    transform: scale(0.8);
+
+                }
             }
         }
     }

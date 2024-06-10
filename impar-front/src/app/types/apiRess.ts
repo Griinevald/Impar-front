@@ -1,12 +1,13 @@
 interface IPhoto {
-    id: number;
-    base64: string;
+    id?: number| undefined;
+    base64: string| undefined;
 }
 
 export interface ICar {
-    id: number;
-    photoId: number;
-    name: string;
-    status: string;
-    photo: IPhoto;
+    id?: number;
+    photoId?: number;
+    name: string| undefined;
+    status: string| undefined;
+    photo: IPhoto| undefined;
+
 }

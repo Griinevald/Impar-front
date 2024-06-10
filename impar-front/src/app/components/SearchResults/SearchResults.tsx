@@ -16,7 +16,7 @@ const SearchResults = ({ results }: ISearchResults) => {
                 <button onClick={() => handleClick()}>Novo Card</button>
             </div>
             <div className={styles.scrolCards}>
-                {results?.map((card: Icard) => <Card imgUrl={card.imgUrl} status={card.status} id={card.id} name={card.name} />)}
+                {results?.map((card: Icard) => <Card imgUrl={card.imgUrl} status={card.status} id={card.id} name={card.name} idImg={card.idImg} />)}
             </div>
         </div>
     )

@@ -9,16 +9,17 @@ import PanelSlider from "./components/Slider/PanelSlider";
 import MyContext from "./context/contextProvider";
 import Icard from "./types/Icard";
 import { getAll } from "./services/api";
-import PanelLogic from "./PanelLogic";
+import PanelLogic from "./pageLogic";
 
 export default function Home() {
 
-  const [cards, setCards] = useState<Array<Icard> | undefined>()
-
+  const [cards, setCards] = useState<Array<Icard>>([])
   const [panelPosition, setPanelPosition] = useState<boolean>(false);
   const [modalDelete, setModalDelete] = useState<boolean>(false);
   const [selectedCard, setSelectedCard] = useState<Icard | undefined>()
-  const [ItemToDelete, setItemToDelete] = useState<number | undefined>(undefined)
+  const [ItemToDelete, setItemToDelete] = useState<number>(-1)
+  const [Filename, setFilename] = useState<string>('');
+
 
   const { mountCards } = PanelLogic();
 
@@ -27,9 +28,7 @@ export default function Home() {
       await getAll.then((data) => {
         const mountedCards = mountCards(data);
         setCards(mountedCards)
-        debugger
       }).catch((error) => {
-        debugger
         console.error(error);
       });
     })()
@@ -37,12 +36,12 @@ export default function Home() {
 
 
   return (
-    <MyContext.Provider value={{ panelPosition, setPanelPosition, modalDelete, setModalDelete, ItemToDelete, setItemToDelete, selectedCard, setSelectedCard }}>
+    <MyContext.Provider value={{ panelPosition, setPanelPosition, modalDelete, setModalDelete, ItemToDelete, setItemToDelete, selectedCard, setSelectedCard, cards, setCards, Filename, setFilename }}>
       <div className={styles.content}>
         <PanelSlider />
         <CardDelete />
         <TopHeader />
-        <SearchComponent  />
+        <SearchComponent />
         <SearchResults results={cards} />
       </div>
     </MyContext.Provider>

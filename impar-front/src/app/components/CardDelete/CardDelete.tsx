@@ -7,10 +7,11 @@ import CardDeleteLogic from './CardDeleteLogic';
 
 
 const CardDelete = () => {
-    const { closeCard, onclickOutside, deleteBackground } = CardDeleteLogic();
+    const { closeCard, onclickOutside, deleteBackground, deleteItemId } = CardDeleteLogic();
 
     const context = useContext(MyContext)
 
+   
     return (
 
         <div ref={deleteBackground} onClick={(e) => onclickOutside(e)} style={{ display: `${context?.modalDelete ? 'flex' : 'none'}` }} className={`${styles.background}`}>
@@ -28,11 +29,11 @@ const CardDelete = () => {
                 </div>
                 <div className={styles.separator}></div>
                 <div className={styles.cardActions}>
-                    <button className={styles.deleteButton}>Excluir</button>
+                    <button onClick={() => deleteItemId()} className={styles.deleteButton}>Excluir</button>
                     <button onClick={() => closeCard()} className={styles.cancelButton}>Cancelar</button>
                 </div>
             </div>
-            
+
         </div>
 
     )
