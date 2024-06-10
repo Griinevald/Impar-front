@@ -1,0 +1,59 @@
+.searchResults {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    width: 100%;
+    max-width: 1046px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 34px;
+
+    span {
+        font-family: "muli", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 32px;
+        color: #5f1478;
+        letter-spacing: 0;
+        line-height: 40px;
+        align-self: flex-end;
+    }
+
+    button {
+        width: 173px;
+        height: 48px;
+        background: #E76316 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #92207242;
+        color: #FFFFFF;
+        border-radius: 8px;
+        font-size: 18px;
+        font-family: "muli", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: transform 0.1s ease;
+    }
+
+    button:active {
+        transform: scale(0.97);
+
+    }
+}
+
+.scrolCards {
+    max-width: 1056px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 36px;
+    row-gap: 38px;
+}

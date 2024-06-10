@@ -1,0 +1,177 @@
+.sliderPanel {
+    overflow: hidden;
+
+    .slider {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        margin-top: -64px;
+        z-index: 104;
+
+        .sliderDiv {
+            width: 100%;
+            height: 100%;
+            background-color: #f6f4f6cc;
+            position: relative;
+
+            .panel {
+                z-index: 105;
+                position: fixed;
+                right: 0;
+                max-width: 642px;
+                width: 100%;
+                height: 100%;
+                background: #FFFFFF 0% 0% no-repeat padding-box;
+                padding: 32px 41px;
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    gap: 18px;
+                    margin-bottom: 32px;
+
+                    h1 {
+                        margin: 10px 0 0px 0;
+                        font-family: "muli", sans-serif;
+                        font-weight: 700;
+                        font-style: normal;
+                        color: #5F1478;
+                        line-height: 40px;
+                    }
+                }
+
+                .inputDiv {
+                    margin-top: 42px;
+                    margin-bottom: 50px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 50px;
+
+                    .inputCardName {
+                        .inputText {
+                            background: #FFFFFF 0% 0% no-repeat padding-box;
+                            border: 1px solid #B9B9B9;
+                            border-radius: 8px;
+                            height: 34px;
+                            padding: 9px 25px;
+                            font-family: "muli", sans-serif;
+                            font-weight: 300;
+                            font-style: normal;
+                            line-height: 23px;
+                            color: #757575;
+                            font-size: 18px;
+
+                        }
+                    }
+
+                    .inputCardName,
+                    .inputCardFile {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 12px;
+
+                        label {
+                            font-family: "muli", sans-serif;
+                            font-weight: 700;
+                            font-style: normal;
+                            color: #454545;
+                            line-height: 14px;
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    .inputCardFile {
+
+                        .inputDivButton {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+                            height: 60px;
+                            background: #FFFFFF 0% 0% no-repeat padding-box;
+                            border: 1px solid #B9B9B9;
+                            border-radius: 8px;
+
+                            .inputButton {
+                                cursor: pointer;
+                                margin: 8px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 224px;
+                                height: 48px;
+                                background: #FFFFFF 0% 0% no-repeat padding-box;
+                                box-shadow: 0px 3px 6px #E763162E;
+                                border: 1px solid #E76316;
+                                border-radius: 8px;
+                                font-family: "muli", sans-serif;
+                                font-weight: 300;
+                                font-style: normal;
+                                line-height: 23px;
+                                color: #E76316;
+                                font-size: 18px;
+                            }
+                            
+
+                            p {
+                                cursor: default;
+                                padding: 9px 25px;
+                                font-family: "muli", sans-serif;
+                                font-weight: 300;
+                                font-style: normal;
+                                line-height: 23px;
+                                color: #757575;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+
+                }
+
+                .separator {
+                    width: 572px;
+                    height: 0px;
+                    border: 1px solid #D4D4D4;
+                    margin: 0 auto;
+                }
+
+                .divCreate {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 26px;
+
+                    .buttonCreate {
+                        cursor: pointer !important;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 167px;
+                        height: 48px;
+                        background: #E76316 0% 0% no-repeat padding-box;
+                        box-shadow: 0px 3px 6px #92207242;
+                        border-radius: 8px;
+
+                        font-family: "muli", sans-serif;
+                        font-weight: 700;
+                        font-style: normal;
+                        line-height: 23px;
+                        font-size: 18px;
+                        color: #fff;
+                        transition: transform 0.1s ease;
+                        z-index: 150;
+                    }
+
+                    .buttonCreate:active {
+                        transform: scale(0.97);
+
+                    }
+                }
+
+            }
+
+        }
+    }
+}

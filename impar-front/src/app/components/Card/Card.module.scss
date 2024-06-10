@@ -1,0 +1,140 @@
+@import url("https://use.typekit.net/vso6bei.css");
+
+.mainPage {
+    display: flex;
+    justify-content: center;
+
+
+    .card {
+        width: 234px;
+        height: 267px;
+        background-color: #fff;
+        box-shadow: 0px 3px 6px #E5E5E5;
+        border: 1px solid #E4E4E4;
+        border-radius: 8px;
+        opacity: 1;
+        overflow: hidden;
+
+
+
+        .cardContent {
+            display: flex;
+            height: 226px;
+            width: 100%;
+            align-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            .img {
+                display: flex;
+                justify-content: center;
+                padding: 28px;
+
+                img {
+                    width: 95px;
+                    height: 95px;
+                    border-radius: 50%;
+                    border: 1px solid #E4E4E4;
+                    opacity: 1;
+                    display: flex;
+                }
+            }
+
+            .separator {
+                height: 0px;
+                border: 1px solid #F0EFF0;
+                opacity: 1;
+                width: 169px;
+                display: flex;
+            }
+
+            .status {
+                display: flex;
+                margin: 0 22px 0 22px;
+                height: 100%;
+                overflow: hidden;
+
+                p {
+                    text-align: center;
+                    font-family: "muli", sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 16px;
+                    color: #263238;
+                    letter-spacing: 0;
+                    line-height: 20px;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+
+            }
+
+        }
+
+        .bottonCard {
+            height: 43px;
+            width: 100%;
+            display: flex;
+            box-shadow: inset 0px 3px 6px #0000000F;
+
+            .divButtonAction {
+                display: flex;
+                width: 50%;
+                height: 100%;
+                justify-content: center;
+                gap: 11px;
+                align-items: center;
+
+                .icon {
+                    display: flex;
+                    width: 12.64px;
+                    height: 14.05px;
+                    align-items: center;
+                }
+
+                p {
+                    font-family: "muli", sans-serif;
+                    //essa fonte e menor e nao da pra centralizar ela corretamente, por isso tive q adicionar esse padding para tentar melhorar um pouco
+                    padding: 5px 0 0px 0;
+
+                    text-align: center;
+                    letter-spacing: 0;
+                    line-height: 19px;
+                    font-weight: 400;
+                    font-style: normal;
+                    text-overflow: ellipsis;
+                    display: flex;
+                    color: rgba(117, 117, 117, 0.842);
+                    transition: color 200ms ease-out 100ms;
+                    opacity: 0.52;
+                    font-size: 15px;
+                    cursor: pointer;
+                    
+                }
+
+                .editHover:hover {
+                    color: #E76316;
+                    opacity: 1;
+                }
+
+                .deleteHover:hover {
+                    color: #DB2525;
+                    opacity: 1;
+                }
+            }
+
+            .buttonSeparator {
+                height: 22px;
+                border: 1px solid #F6F4F6;
+                opacity: 1;
+                display: flex;
+                align-self: center;
+            }
+
+
+
+        }
+    }
+}
