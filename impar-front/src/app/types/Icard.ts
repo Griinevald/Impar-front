@@ -1,7 +1,7 @@
 export default interface Icard {
-    imgUrl?: string| undefined;
-    status?: string| undefined;
-    name?: string| undefined;
-    idImg?:number| undefined;
-    id?: number| undefined;
+    ImgUrl?: string| undefined;
+    Status?: string| undefined;
+    Name?: string| undefined;
+    IdImg?:number| undefined;
+    Id?: number| undefined;
 }

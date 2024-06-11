@@ -6,29 +6,35 @@ const CardDeleteLogic = (): any => {
     const deleteBackground = useRef<HTMLInputElement | null>(null);
     const context = useContext(MyContext)
     const closeCard = () => {
-        context?.setModalDelete(false);
-        context?.setItemToDelete(-1);
-
+        if (!context?.loading) {
+            context?.setModalDelete(false);
+            context?.setItemToDelete(-1);
+        }
     }
+
     const onclickOutside = (ele: HTMLInputElement | any) => {
         const className = ele.target.className;
         if (className.includes("background")) {
             closeCard()
         }
     }
+
     const deleteItemId = async () => {
-        if (context?.ItemToDelete) {
+        context?.setloading(true);
+        if (context?.ItemToDelete && !context.loading) {
             deleteItem(context?.ItemToDelete).then((data) => {
                 console.log(`Item: ${context?.ItemToDelete} was removed!`);
-                const newArray: any = context?.cards?.filter((item: Icard) => item.id !== context?.ItemToDelete)
+                const newArray: any = context?.cards?.filter((item: Icard) => item.Id !== context?.ItemToDelete)
                 context?.setCards(newArray)
                 closeCard();
+                context?.setloading(false);
             }).catch((error) => {
                 console.error(error);
             });
 
         }
     }
+
     return {
         closeCard,
         onclickOutside,

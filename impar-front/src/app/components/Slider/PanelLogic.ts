@@ -2,10 +2,11 @@ import MyContext from "@/app/context/contextProvider";
 import Icard from "@/app/types/Icard";
 import { ICar } from "@/app/types/apiRess";
 import { useState, useRef, useContext } from "react";
-import { addItem, updateItemId } from '../../services/api'
+import { addItem, getWithFilter, updateItemId } from '../../services/api'
 import pageLogic from '../../pageLogic'
 const PanelLogic = (): any => {
     const [inputFile, setInputFile] = useState<string>('');
+    const [valid, setValid] = useState<boolean>(true);
     const [forceUpdate, setforceUpdate] = useState<number>(1);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const outsideMainDiv = useRef<HTMLInputElement | null>(null);
@@ -18,22 +19,27 @@ const PanelLogic = (): any => {
             btn.click();
         }
     };
+
     const setHide = () => {
-        context?.setPanelPosition(false)
-        context?.setSelectedCard(undefined);
-        setInputFile('')
-        context?.setFilename('')
-        setforceUpdate(forceUpdate + 1)
-    }
+        if (!context?.loading) {
+            context?.setPanelPosition(false)
+            context?.setSelectedCard(undefined);
+            setInputFile('')
+            context?.setFilename('')
+            setValid(true)
+            setforceUpdate(forceUpdate + 1)
+        }
+    };
+
     const updateLabelInput = (ele: HTMLInputElement | any) => {
         if (ele.target.files[0].name) {
-            const stringName = ele.target.files[0].name.substring(0, 30);
+            const str = ele.target.files[0].name
             const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
-            const extension = stringName.split('.').pop().toLowerCase();
+            const extension = ele.target.files[0].name.split('.').pop().toLowerCase();
             const isImg = imageExtensions.includes(extension);
 
             if (isImg) {
-                context?.setFilename(stringName)
+                context?.setFilename(str)
                 setInputFile(ele.target.value);
 
                 const reader = new FileReader();
@@ -41,8 +47,8 @@ const PanelLogic = (): any => {
                     const base64 = reader.result as string
                     const newCard: Icard = {
                         ...context?.selectedCard,
-                        status: stringName,
-                        imgUrl: base64,
+                        Status: str,
+                        ImgUrl: base64,
                     };
                     context?.setSelectedCard(newCard);
                 };
@@ -54,73 +60,127 @@ const PanelLogic = (): any => {
             }
 
         }
-    }
+    };
+
     const onclickOutside = (ele: HTMLInputElement | any) => {
         const className = ele.target.className;
         if (className.includes("sliderDiv")) {
-            setHide()
+            if (!context?.loading) {
+                setHide()
+            }
         }
-    }
+    };
+
     const getText = (ele: HTMLInputElement | any) => {
         const string = ele.target.value;
         const newCard: Icard = {
             ...context?.selectedCard,
-            name: string,
+            Name: string,
         };
         context?.setSelectedCard(newCard);
 
-    }
-    const createCard = async () => {
-        const objToPost: ICar = {
-            name: context?.selectedCard?.name,
-            status: context?.selectedCard?.status,
-            photo: {
-                base64: context?.selectedCard?.imgUrl?.split(';base64,')[1]
-            }
-        }
-        await addItem(objToPost).then(async (data) => {
-            const setCard = mountCards([data]);
-            if (context?.cards) {
-                context?.setCards([...context?.cards, ...setCard])
-            } else {
-                context?.setCards(setCard)
-            }
-            setHide()
-        }).catch((error) => {
-            console.error(error);
+    };
+
+    const orderArray = (array: Array<Icard>) => {
+        const orded = array.sort((a: any, b: any) => {
+            const nameA = a?.Name.toLowerCase();
+            const nameB = b?.Name.toLowerCase();
+
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
         });
+        return orded;
+    };
 
+    const validInput = () => {
+        if (!context?.Filename || !context?.selectedCard?.Name) {
+            setValid(false)
+            return false;
+        } else {
+            return true;
+        }
     }
-    const updateItem = async () => {
-        const objToPost: ICar = {
-            id: context?.selectedCard?.id,
-            name: context?.selectedCard?.name,
-            status: context?.selectedCard?.status,
-            photoId: context?.selectedCard?.idImg,
-            photo: {
-                base64: context?.selectedCard?.imgUrl?.split(';base64,')[1]
-            }
-        }
-        if (objToPost?.id) {
-            await updateItemId(objToPost.id, objToPost).then(async (data) => {
-                const setCard: any = mountCards([data]);
-                if (context?.cards) {
-                    const updatedItems: Array<Icard> = context?.cards.map((item: Icard) => {
-                        if (item.id === objToPost?.id) {
-                            debugger
-                            return { ...setCard[0] };
-                        } else {
-                            return { ...item }
-                        }
-                    });
-                    context?.setCards(updatedItems)
 
+    const createCard = async () => {
+        context?.setloading(true)
+        if (validInput()) {
+            setValid(true)
+            if (!context?.loading) {
+                const objToPost: ICar = {
+                    Name: context?.selectedCard?.Name,
+                    Status: context?.selectedCard?.Status,
+                    Photo: {
+                        Base64: context?.selectedCard?.ImgUrl?.split(';base64,')[1]
+                    }
                 }
-                setHide()
-            }).catch((error) => {
-                console.error(error);
-            });
+                addItem(objToPost).then(async (data: ICar) => {
+                    console.log(data)
+                    const updatedItems: any = getWithFilter(context!?.cards.length, 8, '')
+
+                    const setCard = mountCards(updatedItems);
+
+                    if (context?.cards) {
+                        const allCards = orderArray([...context?.cards, ...setCard]);
+                        context?.setCards(allCards);
+                    } else {
+                        context?.setCards(setCard);
+                    }
+
+                    context?.setloading(false)
+                    setHide()
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
+        } else {
+            context?.setloading(false)
         }
+
+    };
+
+    const updateItem = async () => {
+        context?.setloading(true)
+        if (validInput()) {
+            if (!context?.loading) {
+                const objToPost: ICar = {
+                    Id: context?.selectedCard?.Id,
+                    Name: context?.selectedCard?.Name,
+                    Status: context?.selectedCard?.Status,
+                    PhotoId: context?.selectedCard?.IdImg,
+                    Photo: {
+                        Base64: context?.selectedCard?.ImgUrl?.split(';base64,')[1]
+                    }
+                }
+                if (objToPost?.Id) {
+                    updateItemId(objToPost.Id, objToPost).then((data) => {
+                        console.log(data)
+                        const setCard: any = mountCards([objToPost]);
+                        if (context?.cards) {
+                            const updatedItems: Array<Icard> = context?.cards.map((item: Icard) => {
+                                if (item.Id === objToPost?.Id) {
+                                    return { ...setCard[0] };
+                                } else {
+                                    return { ...item }
+                                }
+                            });
+                            context?.setCards(updatedItems)
+
+                        }
+                        context?.setloading(false)
+                        setHide()
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                }
+            }
+        } else {
+            context?.setloading(false)
+        }
+    };
+
+    const getLabelString = (str: string) => {
+        return str.length <= 30 ? str : str.substring(0, 17) + '...' + str.slice(-10)
     }
 
     return {
@@ -134,8 +194,9 @@ const PanelLogic = (): any => {
         forceUpdate,
         createCard,
         setforceUpdate,
-        updateItem
-    }
-}
+        updateItem,
+        valid,
+        getLabelString
+    };
+};
 export default PanelLogic;
-

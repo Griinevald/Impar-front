@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from './SearchComponent.module.scss'
 import Banner from './icons/FundoBusca.png'
 import Lupa from './icons/lupa.svg'
 import SearchLogic from './SearchLogic'
+import MyContext from "@/app/context/contextProvider";
 
 const SearchComponent = () => {
 
-    const { searchValue, onKeyDown, setSearchValue, search } = SearchLogic();
+    const { onKeyDown, search } = SearchLogic();
+
+    const context = useContext(MyContext);
 
     return (
         <div style={{ backgroundImage: `url(${Banner.src})` }} className={styles.divBanner}>
@@ -15,10 +18,10 @@ const SearchComponent = () => {
                 <div className={styles.search}>
                     <input
                         type="text"
-                        value={searchValue}
+                        value={context?.searchValue}
                         onKeyDown={onKeyDown}
                         placeholder="Digite aqui sua busca..."
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={(e) => context?.setSearchValue(e.target.value)}
                     />
                     <div className={styles.buttonSearch}>
                         <img onClick={() => search()} className={styles.img} src={Lupa.src} alt="" />

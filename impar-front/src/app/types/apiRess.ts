@@ -1,13 +1,19 @@
 interface IPhoto {
-    id?: number| undefined;
-    base64: string| undefined;
+    Id?: number | undefined;
+    Base64: string | undefined;
 }
 
 export interface ICar {
-    id?: number;
-    photoId?: number;
-    name: string| undefined;
-    status: string| undefined;
-    photo: IPhoto| undefined;
+    Id?: number;
+    PhotoId?: number;
+    Name: string | undefined;
+    Status: string | undefined;
+    Photo: IPhoto | undefined;
 
 }
+export interface IODataResponse<T> {
+    "@odata.context": string;
+    "@odata.count"?: number;
+    value: T[];
+}
+export interface ICarODataResponse extends IODataResponse<ICar> {}

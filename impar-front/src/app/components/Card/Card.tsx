@@ -6,7 +6,7 @@ import IconDelete from './icons/Icon-trash.svg'
 import IconEdit from './icons/Icon-edit.svg'
 import CardLogic from "./CardLogic";
 
-const Card = ({ imgUrl, status, id, name, idImg }: Icard) => {
+const Card = ({ ImgUrl, Status, Id, Name, IdImg }: Icard) => {
 
     const { openDeleteCard, openEditCard } = CardLogic();
 
@@ -15,24 +15,24 @@ const Card = ({ imgUrl, status, id, name, idImg }: Icard) => {
             <div className={styles.card}>
                 <div className={styles.cardContent}>
                     <div className={styles.img}>
-                        <img src={imgUrl} alt="" />
+                        <img src={ImgUrl} alt="" />
                     </div>
                     <div className={styles.separator} ></div>
                     <div className={styles.status}>
                         <p>
-                            {name}
+                            {Name}
                         </p>
                     </div>
                 </div>
                 <div className={styles.bottonCard}>
                     <div className={styles.divButtonAction}>
                         <Image className={styles.icon} src={IconDelete} alt="Excluir" />
-                        <p onClick={() => openDeleteCard(id)} className={styles.deleteHover}>Excluir</p>
+                        <p onClick={() => openDeleteCard(Id)} className={styles.deleteHover}>Excluir</p>
                     </div>
                     <div className={styles.buttonSeparator}></div>
                     <div className={styles.divButtonAction}>
                         <Image className={styles.icon} src={IconEdit} alt="Editar" />
-                        <p onClick={() => openEditCard(imgUrl, status, id, name, idImg)} className={styles.editHover}>Editar</p>
+                        <p onClick={() => openEditCard(ImgUrl, Status, Id, Name, IdImg)} className={styles.editHover}>Editar</p>
                     </div>
                 </div>
             </div>

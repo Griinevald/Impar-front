@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { ICar } from '../types/apiRess';
+import { ICar, ICarODataResponse } from '../types/apiRess';
 
-const getAll = new Promise<Array<ICar>>(async (resolve, reject) => {
+const getAll = new Promise<ICarODataResponse>(async (resolve, reject) => {
     try {
         const response = await axios.get("http://localhost:5032/api/Car");
         resolve(response.data);
@@ -9,14 +9,15 @@ const getAll = new Promise<Array<ICar>>(async (resolve, reject) => {
         reject(error);
     }
 });
-const getWithFilter = (item: string) => new Promise<Array<ICar>>(async (resolve, reject) => {
+const getWithFilter = (skip: number, top: number, item: string) => new Promise<ICarODataResponse>(async (resolve, reject) => {
     try {
-        const response = await axios.get(`http://localhost:5032/api/Car?$filter=contains(tolower(name), '${item.toLocaleLowerCase()}')`);
+        const response = await axios.get(`http://localhost:5032/odata/CarOdata?${item ? `$filter=contains(tolower(Name), tolower('${item}'))&` : ''}$count=true&$skip=${skip}&$top=${top}&$expand=Photo&$orderby=Name`);
         resolve(response.data);
     } catch (error) {
         reject(error);
     }
 })
+
 const addItem = (item: ICar) => new Promise<ICar>(async (resolve, reject) => {
     try {
         const response = await axios.post("http://localhost:5032/api/Car", item);
@@ -25,7 +26,7 @@ const addItem = (item: ICar) => new Promise<ICar>(async (resolve, reject) => {
         reject(error);
     }
 })
-const deleteItem = (item: number) => new Promise<Array<ICar>>(async (resolve, reject) => {
+const deleteItem = (item: number) => new Promise<ICarODataResponse>(async (resolve, reject) => {
     try {
         const response = await axios.delete(`http://localhost:5032/api/Car/${item}`);
         resolve(response.data);

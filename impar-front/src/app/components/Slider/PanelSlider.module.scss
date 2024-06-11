@@ -71,6 +71,14 @@
                         flex-direction: column;
                         gap: 12px;
 
+                        p {
+                            font-family: "muli", sans-serif;
+                            font-size: 14px;
+                            margin: 0;
+                            line-height: 0px;
+                            color: #E76316;
+                        }
+
                         label {
                             font-family: "muli", sans-serif;
                             font-weight: 700;
@@ -112,7 +120,7 @@
                                 color: #E76316;
                                 font-size: 18px;
                             }
-                            
+
 
                             p {
                                 cursor: default;

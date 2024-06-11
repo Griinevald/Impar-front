@@ -53,7 +53,23 @@
     display: flex;
     flex-wrap: wrap;
     column-gap: 36px;
-    padding-left: 36px;
     row-gap: 38px;
-    justify-content: flex-start; 
+    justify-content: flex-start;
+
+    .spinner {
+        width: 100%;
+    }
+}
+
+.divNotFound {
+    h5 {
+        font-family: "muli", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 18px;
+        color: #5f1478;
+        letter-spacing: 0;
+        line-height: 40px;
+        align-self: flex-end;
+    }
 }

@@ -4,6 +4,7 @@ import DeleteIcon from './icons/icon-trash.svg'
 import { useContext } from 'react';
 import MyContext from '@/app/context/contextProvider';
 import CardDeleteLogic from './CardDeleteLogic';
+import Spinner from '../Spinner/Spinner';
 
 
 const CardDelete = () => {
@@ -11,7 +12,7 @@ const CardDelete = () => {
 
     const context = useContext(MyContext)
 
-   
+
     return (
 
         <div ref={deleteBackground} onClick={(e) => onclickOutside(e)} style={{ display: `${context?.modalDelete ? 'flex' : 'none'}` }} className={`${styles.background}`}>
@@ -29,7 +30,7 @@ const CardDelete = () => {
                 </div>
                 <div className={styles.separator}></div>
                 <div className={styles.cardActions}>
-                    <button onClick={() => deleteItemId()} className={styles.deleteButton}>Excluir</button>
+                    <button onClick={() => deleteItemId()} className={styles.deleteButton}>{context?.loading ? <Spinner color='#db2525' secondaryColor='' width='2rem' height='2rem' /> : 'Excluir'}</button>
                     <button onClick={() => closeCard()} className={styles.cancelButton}>Cancelar</button>
                 </div>
             </div>

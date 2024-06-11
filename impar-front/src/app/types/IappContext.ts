@@ -10,9 +10,14 @@ export interface IappContext {
     setItemToDelete: Dispatch<SetStateAction<number>>;
     selectedCard: Icard | undefined;
     setSelectedCard: Dispatch<SetStateAction<Icard | undefined>>;
-    cards: Array<Icard> | undefined;
+    cards: Array<Icard> ;
     setCards: Dispatch<SetStateAction<Array<Icard>>>;
     Filename: string | undefined;
     setFilename: Dispatch<SetStateAction<string>>;
-
+    count: number;
+    setCount: Dispatch<SetStateAction<number>>;
+    loading: boolean;
+    setloading: Dispatch<SetStateAction<boolean>>;
+    searchValue: string;
+    setSearchValue: Dispatch<SetStateAction<string>>;
 }
